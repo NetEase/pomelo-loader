@@ -33,7 +33,7 @@ describe('loader', function() {
 			services.whoAmIRemote.name.should.be.a('string');
 		});
 		
-		it('should invoke functions of loaded object successfully', function() {
+		it('should invoke functions of loaded object successfully', function(done) {
 			var callbackCount = 0, sid = 'area-server-1';
 			var context = {id: sid};
 			var services = Loader.load(path, context);
@@ -68,7 +68,6 @@ describe('loader', function() {
 		
 		it('should throw an error if the path is empty', function() {
 			var path = './mock-remote/connector';
-			var errorCount = 0;
 			(function() {
 				Loader.load(path);
 			}).should.throw();
@@ -79,40 +78,6 @@ describe('loader', function() {
 			(function() {
 				Loader.loadPath(path);
 			}).should.throw();
-		});
-		
-		it('should replace the module by loadedCB function\'s return value', function() {
-			var delegatedObj = {
-				aService: function() {}, 
-				bProperty: 'some property'
-			};
-
-			var attachObj = {
-				someProperty: 'some property 1', 
-				otherProperty: 'other property'
-			};
-
-			var loadedCount = 0;
-
-			var loadedCB = function(path, moduleName, module, attach) {
-				loadedCount++;
-				attach.should.equal(attachObj);
-				return delegatedObj;
-			}
-
-			var services = Loader.load(path, null, attachObj, loadedCB);
-			should.exist(services);
-
-			services.should.have.property('addOneRemote');
-			services.addOneRemote.should.equal(delegatedObj);
-
-			services.should.have.property('addThreeRemote');
-			services.addThreeRemote.should.equal(delegatedObj);
-
-			services.should.have.property('whoAmIRemote');
-			services.whoAmIRemote.should.equal(delegatedObj);
-
-			loadedCount.should.equal(3);
 		});
 	});
 });
