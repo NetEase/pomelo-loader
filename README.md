@@ -1,4 +1,4 @@
-#pomelo-loader - loader module for pomelo Convention over Configuration
+#pomelo-loader - loader module for pomelo
 pomelo中使用Convention over Configuration的形式管理工程目录，不同的功能按约定放在不同的目录下。pomelo-loader为pomelo提供了按目录加载模块的功能。
 
 pomelo-rpc可以批量加载指定目录下的模块，挂到一个空对象下返回（但不会递归加载子目录），同时提供模块命名机制。
