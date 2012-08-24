@@ -14,6 +14,13 @@ exports.name = 'test';
 ```
 返回的结果为：{test: require('./lib/a')}
 
+模块定义
+如果模块以function的形式暴露出去，则这个function会被当作构造模块实例的工厂方法，Loader会调用这个function获取模块的实例，同时可以传递一个context参数作为工厂方法的参数。其他情况则直接把加载到的模块返回。
+```javascript
+module.exports = function(context) {
+	return {};	// return some module instance	
+};
+```
 
 ##安装
 ```
@@ -27,6 +34,7 @@ var Loader = require('pomelo-loader');
 var res = Loader.load('.');
 console.log('res: %j', res);
 ``` 
+模块定义成函数，加载
 
 ##API
 ###Loader.load(path, context)
