@@ -1,11 +1,17 @@
 #pomelo-loader
 pomelo中使用Convention over Configuration的形式管理工程目录，不同的功能按约定放在不同的目录下。pomelo-loader为pomelo提供了按目录加载模块的功能。
-pomelo-rpc可以批量加载指定目录下的模块，挂到一个空对象下返回（但不会递归加载子目录），同时提供模块命名和替换机制。
+
+pomelo-rpc可以批量加载指定目录下的模块，挂到一个空对象下返回（但不会递归加载子目录），同时提供模块命名机制。
+
 模块命名
+
 模块默认以文件名为名。如：加载lib/a.js后，返回的结果为：{a: require('./lib/a')}。
+
 如果模块中定义了name属性，则会以name作为模块的名称。如：
+```javascript
 a.js
 exports.name = 'test';
+```
 返回的结果为：{test: require('./lib/a')}
 
 
