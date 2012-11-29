@@ -11,7 +11,6 @@ Module name
 
 Module would use the filename by default. For example: load ```lib/a.js``` and the return result would be: ```{a: require('./lib/a')}```
 
-如果模块中定义了name属性，则会以name作为模块的名称。如：
 It would use the name if the module with a name property. For example
 
 ```javascript
